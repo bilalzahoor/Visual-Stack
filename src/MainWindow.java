@@ -79,7 +79,7 @@ public class MainWindow {
 		frame.getContentPane().add(comboBox_1);
 		
 		JButton btnNewButton = new JButton("Create");
-		btnNewButton.setForeground(Color.ORANGE);
+		btnNewButton.setForeground(Color.RED);
 		btnNewButton.setBounds(17, 151, 89, 23);
 		frame.getContentPane().add(btnNewButton);
 		
@@ -88,22 +88,27 @@ public class MainWindow {
 		frame.getContentPane().add(lblStackOperations);
 		
 		JButton btnPush = new JButton("Push");
+		btnPush.setForeground(Color.RED);
 		btnPush.setBounds(158, 151, 89, 23);
 		frame.getContentPane().add(btnPush);
 		
 		JButton btnNewButton_1 = new JButton("Pop");
+		btnNewButton_1.setForeground(Color.RED);
 		btnNewButton_1.setBounds(306, 151, 89, 23);
 		frame.getContentPane().add(btnNewButton_1);
 		
 		JButton btnNewButton_2 = new JButton("Peep");
+		btnNewButton_2.setForeground(Color.RED);
 		btnNewButton_2.setBounds(17, 203, 89, 22);
 		frame.getContentPane().add(btnNewButton_2);
 		
 		JButton btnNewButton_3 = new JButton("Count");
+		btnNewButton_3.setForeground(Color.RED);
 		btnNewButton_3.setBounds(158, 203, 89, 23);
 		frame.getContentPane().add(btnNewButton_3);
 		
 		JButton btnNewButton_4 = new JButton("Traverse");
+		btnNewButton_4.setForeground(Color.RED);
 		btnNewButton_4.setBounds(306, 203, 89, 23);
 		frame.getContentPane().add(btnNewButton_4);
 	}
