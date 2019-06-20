@@ -79,6 +79,7 @@ public class MainWindow {
 		frame.getContentPane().add(comboBox_1);
 		
 		JButton btnNewButton = new JButton("Create");
+		btnNewButton.setForeground(Color.ORANGE);
 		btnNewButton.setBounds(17, 151, 89, 23);
 		frame.getContentPane().add(btnNewButton);
 		
