@@ -114,9 +114,5 @@ public class MainWindow {
 		btnNewButton_4.setForeground(Color.RED);
 		btnNewButton_4.setBounds(306, 203, 89, 23);
 		frame.getContentPane().add(btnNewButton_4);
-		
-		JLabel lblHello = new JLabel("hello");
-		lblHello.setBounds(58, 271, 48, 14);
-		frame.getContentPane().add(lblHello);
 	}
 }
