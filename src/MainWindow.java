@@ -10,6 +10,8 @@ import javax.swing.JList;
 import javax.swing.JTree;
 import javax.swing.JComboBox;
 import javax.swing.JButton;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class MainWindow {
 
@@ -76,12 +78,20 @@ public class MainWindow {
 		comboBox_1.addItem("--MAX Capacity--");
 		comboBox_1.addItem("05");
 		comboBox_1.addItem("10");
-		comboBox_1.addItem("15");
+		
 		
 		comboBox_1.setBounds(266, 49, 129, 22);
 		frame.getContentPane().add(comboBox_1);
 		
 		JButton btnNewButton = new JButton("Create");
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				CreateWindow nw = new CreateWindow();
+				nw.CreateScreen();
+				
+			}
+		});
 		btnNewButton.setForeground(Color.RED);
 		btnNewButton.setBounds(17, 151, 89, 23);
 		frame.getContentPane().add(btnNewButton);

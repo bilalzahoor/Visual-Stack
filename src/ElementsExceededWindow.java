@@ -3,24 +3,19 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import java.awt.Font;
-import java.awt.Canvas;
-import java.awt.Panel;
-import javax.swing.JButton;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
 
-public class SecondWindow {
+public class ElementsExceededWindow {
 
 	private JFrame frame;
 
 	/**
 	 * Launch the application.
 	 */
-	public static void main(String[] args) {
+	public static void ElementsExceededScreen() {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					SecondWindow window = new SecondWindow();
+					ElementsExceededWindow window = new ElementsExceededWindow();
 					window.frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -32,7 +27,7 @@ public class SecondWindow {
 	/**
 	 * Create the application.
 	 */
-	public SecondWindow() {
+	public ElementsExceededWindow() {
 		initialize();
 	}
 
@@ -45,9 +40,10 @@ public class SecondWindow {
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 		
-		JLabel lblVisualStackIs = new JLabel("Visual \r\nStack \r\nIs Empty");
-		lblVisualStackIs.setFont(new Font("Tahoma", Font.PLAIN, 32));
-		lblVisualStackIs.setBounds(10, 24, 316, 52);
-		frame.getContentPane().add(lblVisualStackIs);
+		JLabel lblElementsExceede = new JLabel("ELEMENTS EXCEEDED");
+		lblElementsExceede.setFont(new Font("Tahoma", Font.PLAIN, 42));
+		lblElementsExceede.setBounds(10, 43, 424, 146);
+		frame.getContentPane().add(lblElementsExceede);
 	}
+
 }
