@@ -61,6 +61,8 @@ public class MainWindow {
 		frame.getContentPane().add(list);
 		
 		JComboBox comboBox = new JComboBox();
+		
+		
 		comboBox.addItem("Sequintial");
 		comboBox.addItem("Linked List");
 		comboBox.setBounds(133, 49, 105, 22);
