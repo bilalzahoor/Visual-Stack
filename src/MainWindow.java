@@ -50,12 +50,11 @@ public class MainWindow {
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 		
-		JLabel lblStackImplimentation = new JLabel("                    Stack Implimentation");
-		lblStackImplimentation.setFont(new Font("Tahoma", Font.BOLD, 19));
-		lblStackImplimentation.setBackground(Color.CYAN);
-		lblStackImplimentation.setForeground(Color.BLUE);
-		lblStackImplimentation.setVerticalAlignment(SwingConstants.TOP);
-		lblStackImplimentation.setBounds(0, 0, 424, 30);
+		JLabel lblStackImplimentation = new JLabel("Stack Implimentation");
+		lblStackImplimentation.setFont(new Font("Malayalam MN", Font.BOLD, 19));
+		lblStackImplimentation.setBackground(new Color(0, 191, 255));
+		lblStackImplimentation.setForeground(new Color(0, 0, 0));
+		lblStackImplimentation.setBounds(200, 0, 206, 25);
 		frame.getContentPane().add(lblStackImplimentation);
 		
 		JList list = new JList();
@@ -67,11 +66,11 @@ public class MainWindow {
 		
 		comboBox.addItem("Sequintial");
 		comboBox.addItem("Linked List");
-		comboBox.setBounds(133, 49, 105, 22);
+		comboBox.setBounds(150, 50, 120, 22);
 		frame.getContentPane().add(comboBox);
 		
 		JLabel lblTypeOfStack = new JLabel("Type Of Stack :");
-		lblTypeOfStack.setBounds(10, 49, 113, 22);
+		lblTypeOfStack.setBounds(20, 50, 125, 25);
 		frame.getContentPane().add(lblTypeOfStack);
 		
 		JComboBox comboBox_1 = new JComboBox();
@@ -80,7 +79,7 @@ public class MainWindow {
 		comboBox_1.addItem("10");
 		
 		
-		comboBox_1.setBounds(266, 49, 129, 22);
+		comboBox_1.setBounds(300, 50, 170, 22);
 		frame.getContentPane().add(comboBox_1);
 		
 		JButton btnNewButton = new JButton("Create");
@@ -93,36 +92,40 @@ public class MainWindow {
 			}
 		});
 		btnNewButton.setForeground(Color.RED);
-		btnNewButton.setBounds(17, 151, 89, 23);
+		btnNewButton.setBounds(20, 150, 100, 23);
 		frame.getContentPane().add(btnNewButton);
 		
 		JLabel lblStackOperations = new JLabel("Stack Operations :");
-		lblStackOperations.setBounds(129, 99, 136, 14);
+		lblStackOperations.setBounds(20, 100, 125, 25);
 		frame.getContentPane().add(lblStackOperations);
 		
 		JButton btnPush = new JButton("Push");
 		btnPush.setForeground(Color.RED);
-		btnPush.setBounds(158, 151, 89, 23);
+		btnPush.setBounds(150, 150, 100, 23);
 		frame.getContentPane().add(btnPush);
 		
 		JButton btnNewButton_1 = new JButton("Pop");
 		btnNewButton_1.setForeground(Color.RED);
-		btnNewButton_1.setBounds(306, 151, 89, 23);
+		btnNewButton_1.setBounds(280, 150, 100, 23);
 		frame.getContentPane().add(btnNewButton_1);
-		
-		JButton btnNewButton_2 = new JButton("Peep");
-		btnNewButton_2.setForeground(Color.RED);
-		btnNewButton_2.setBounds(17, 203, 89, 22);
-		frame.getContentPane().add(btnNewButton_2);
 		
 		JButton btnNewButton_3 = new JButton("Count");
 		btnNewButton_3.setForeground(Color.RED);
-		btnNewButton_3.setBounds(158, 203, 89, 23);
+		btnNewButton_3.setBounds(150, 200, 100, 23);
 		frame.getContentPane().add(btnNewButton_3);
 		
 		JButton btnNewButton_4 = new JButton("Traverse");
 		btnNewButton_4.setForeground(Color.RED);
-		btnNewButton_4.setBounds(306, 203, 89, 23);
+		btnNewButton_4.setBounds(280, 200, 100, 23);
 		frame.getContentPane().add(btnNewButton_4);
+		
+		JButton btnNewButton_5 = new JButton("Peep");
+		btnNewButton_5.setForeground(Color.RED);
+		btnNewButton_5.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
+		btnNewButton_5.setBounds(20, 200, 100, 29);
+		frame.getContentPane().add(btnNewButton_5);
 	}
 }
