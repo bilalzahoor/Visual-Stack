@@ -8,6 +8,7 @@ import java.awt.Panel;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import javax.swing.SwingConstants;
 
 public class SecondWindow {
 
@@ -45,9 +46,10 @@ public class SecondWindow {
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 		
-		JLabel lblVisualStackIs = new JLabel("Visual \r\nStack \r\nIs Empty");
-		lblVisualStackIs.setFont(new Font("Tahoma", Font.PLAIN, 32));
-		lblVisualStackIs.setBounds(10, 24, 316, 52);
+		JLabel lblVisualStackIs = new JLabel("Visual Stack Is Empty");
+		lblVisualStackIs.setHorizontalAlignment(SwingConstants.CENTER);
+		lblVisualStackIs.setFont(new Font("STIXSizeTwoSym", Font.PLAIN, 20));
+		lblVisualStackIs.setBounds(100, 50, 270, 100);
 		frame.getContentPane().add(lblVisualStackIs);
 	}
 }

@@ -4,6 +4,13 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import java.awt.Font;
 
+import javax.swing.JButton;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+
+import javax.swing.SwingConstants;
+
+
 public class OriginalCreateWindow {
 
 	private JFrame frame;
@@ -40,10 +47,17 @@ public class OriginalCreateWindow {
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 		
+
 		JLabel lblNewLabel = new JLabel("ELEMENTS ARE WITHIN LIMITS");
 		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 19));
-		lblNewLabel.setBounds(34, 45, 377, 137);
-		frame.getContentPane().add(lblNewLabel);
-	}
+		lblNewLabel.setBounds(34, 45, 377, 106);
 
+		
+
+		frame.getContentPane().add(lblNewLabel);
+		
+		JLabel lblDoYouWant = new JLabel("Do You Want To Continue : ");
+		lblDoYouWant.setBounds(10, 175, 219, 14);
+		frame.getContentPane().add(lblDoYouWant);
+	}
 }
