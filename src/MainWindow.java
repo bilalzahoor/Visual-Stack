@@ -98,7 +98,6 @@ public class MainWindow {
 
 		btnNewButton.setBounds(17, 151, 106, 23);
 
-		btnNewButton.setBounds(20, 150, 100, 23);
 
 		frame.getContentPane().add(btnNewButton);
 		
@@ -123,6 +122,7 @@ public class MainWindow {
 		btnNewButton_2.setBounds(17, 203, 106, 22);
 		frame.getContentPane().add(btnNewButton_2);
 		
+
 
 
 		JButton btnNewButton_3 = new JButton("Count");
@@ -161,14 +161,7 @@ public class MainWindow {
 		lblNewLabel_2.setIcon(new ImageIcon("C:\\Users\\Mir Kamran Ellahi\\Documents\\GitHub\\Visual-Stack\\img\\stack-icon.png"));
 		lblNewLabel_2.setBounds(292, 185, 143, 146);
 		frame.getContentPane().add(lblNewLabel_2);
-		JButton btnNewButton_5 = new JButton("Peep");
-		btnNewButton_5.setForeground(Color.RED);
-		btnNewButton_5.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-			}
-		});
-		btnNewButton_5.setBounds(20, 200, 100, 29);
-		frame.getContentPane().add(btnNewButton_5);
+
 
 	}
 }

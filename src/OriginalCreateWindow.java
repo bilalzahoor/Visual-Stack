@@ -3,6 +3,7 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import java.awt.Font;
+import javax.swing.SwingConstants;
 
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
@@ -46,13 +47,10 @@ public class OriginalCreateWindow {
 		frame.setBounds(100, 100, 450, 300);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
-		
 
 		JLabel lblNewLabel = new JLabel("ELEMENTS ARE WITHIN LIMITS");
 		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 19));
 		lblNewLabel.setBounds(34, 45, 377, 106);
-
-		
 
 		frame.getContentPane().add(lblNewLabel);
 		
