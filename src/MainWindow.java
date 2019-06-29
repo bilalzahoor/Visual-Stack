@@ -7,6 +7,7 @@ import javax.swing.SwingConstants;
 import java.awt.Color;
 import java.awt.Font;
 import javax.swing.JList;
+import javax.swing.JOptionPane;
 import javax.swing.JTree;
 import javax.swing.JComboBox;
 import javax.swing.JButton;
@@ -14,10 +15,16 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.ImageIcon;
 import javax.swing.DefaultComboBoxModel;
+import java.awt.event.ItemListener;
+import java.awt.event.ItemEvent;
 
 public class MainWindow {
 
 	private JFrame frame;
+	private JComboBox cmbMaxCapacity;
+	int maxCapacity;
+	private JComboBox cmbStackType;
+	
 
 	/**
 	 * Launch the application.
@@ -41,6 +48,7 @@ public class MainWindow {
 	 */
 	public MainWindow() {
 		initialize();
+		maxCapacity=5;
 	}
 
 	/**
@@ -52,7 +60,7 @@ public class MainWindow {
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 		
-		JLabel lblStackImplimentation = new JLabel("Stack Implimentation");
+		JLabel lblStackImplimentation = new JLabel("Stack Implementation");
 		lblStackImplimentation.setFont(new Font("Malayalam MN", Font.BOLD, 19));
 		lblStackImplimentation.setBackground(new Color(0, 191, 255));
 		lblStackImplimentation.setForeground(new Color(0, 0, 0));
@@ -63,43 +71,59 @@ public class MainWindow {
 		list.setBounds(133, 175, -27, -33);
 		frame.getContentPane().add(list);
 		
-		JComboBox comboBox = new JComboBox();
+		cmbStackType = new JComboBox();
+		cmbStackType.addItem("Sequential");
+		cmbStackType.addItem("Linked List");
+		cmbStackType.setBounds(150, 50, 120, 22);
+		frame.getContentPane().add(cmbStackType);
+		cmbStackType.addItemListener(new ItemListener() {
+			public void itemStateChanged(ItemEvent e) {
+				if (cmbStackType.getSelectedItem().toString().compareTo("Sequential")==0) {
+					cmbMaxCapacity.setVisible(true);
+				}
+				else
+					cmbMaxCapacity.setVisible(false);
+			}
+		});
 		
 		
-		comboBox.addItem("Sequintial");
-		comboBox.addItem("Linked List");
-		comboBox.setBounds(150, 50, 120, 22);
-		frame.getContentPane().add(comboBox);
+		
 		
 		JLabel lblTypeOfStack = new JLabel("Type Of Stack :");
-		lblTypeOfStack.setBounds(20, 50, 125, 25);
+		lblTypeOfStack.setBounds(20, 50, 170, 25);
 		frame.getContentPane().add(lblTypeOfStack);
 		
-		JComboBox comboBox_1 = new JComboBox();
-		comboBox_1.addItem("--MAX Capacity--");
-		comboBox_1.addItem("05");
-		comboBox_1.addItem("10");
+		cmbMaxCapacity = new JComboBox();
+		cmbMaxCapacity.addItem("05");
+		cmbMaxCapacity.addItem("10");
+		cmbMaxCapacity.addItemListener(new ItemListener() {
+			public void itemStateChanged(ItemEvent e) {
+				maxCapacity=Integer.parseInt(cmbMaxCapacity.getSelectedItem().toString());
+				
+				
+			}
+		});
 		
 		
-		comboBox_1.setBounds(300, 50, 170, 22);
-		frame.getContentPane().add(comboBox_1);
 		
-		JButton btnNewButton = new JButton("Create");
-		btnNewButton.setIcon(new ImageIcon("C:\\Users\\Mir Kamran Ellahi\\Documents\\GitHub\\Visual-Stack\\img\\create1-icon.png"));
-		btnNewButton.addActionListener(new ActionListener() {
+		cmbMaxCapacity.setBounds(300, 50, 170, 22);
+		frame.getContentPane().add(cmbMaxCapacity);
+		
+		JButton btnCreate = new JButton("Create");
+		btnCreate.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
-				CreateWindow nw = new CreateWindow();
+				CreateWindow nw = new CreateWindow(maxCapacity);
 				nw.CreateScreen();
 				
 			}
 		});
-		btnNewButton.setForeground(Color.RED);
+		btnCreate.setForeground(Color.RED);
 
-		btnNewButton.setBounds(17, 151, 106, 23);
+		btnCreate.setBounds(17, 151, 106, 23);
 
 
-		frame.getContentPane().add(btnNewButton);
+		frame.getContentPane().add(btnCreate);
 		
 		JLabel lblStackOperations = new JLabel("Stack Operations :");
 		lblStackOperations.setBounds(20, 100, 125, 25);
@@ -110,57 +134,29 @@ public class MainWindow {
 		btnPush.setBounds(150, 150, 100, 23);
 		frame.getContentPane().add(btnPush);
 		
-		JButton btnNewButton_1 = new JButton("Pop");
-		btnNewButton_1.setIcon(new ImageIcon("C:\\Users\\Mir Kamran Ellahi\\Documents\\GitHub\\Visual-Stack\\img\\pop-icon.png"));
-		btnNewButton_1.setForeground(Color.RED);
-		btnNewButton_1.setBounds(280, 150, 100, 23);
-		frame.getContentPane().add(btnNewButton_1);
+		JButton btnpop = new JButton("Pop");
+		btnpop.setForeground(Color.RED);
+		btnpop.setBounds(280, 150, 100, 23);
+		frame.getContentPane().add(btnpop);
 		
 
-		JButton btnNewButton_2 = new JButton("Peep");
-		btnNewButton_2.setForeground(Color.RED);
-		btnNewButton_2.setBounds(17, 203, 106, 22);
-		frame.getContentPane().add(btnNewButton_2);
+		JButton btnPeep = new JButton("Peep");
+		btnPeep.setForeground(Color.RED);
+		btnPeep.setBounds(17, 203, 106, 22);
+		frame.getContentPane().add(btnPeep);
 		
 
 
 
-		JButton btnNewButton_3 = new JButton("Count");
-		btnNewButton_3.setForeground(Color.RED);
-		btnNewButton_3.setBounds(150, 200, 100, 23);
-		frame.getContentPane().add(btnNewButton_3);
+		JButton btnCount = new JButton("Count");
+		btnCount.setForeground(Color.RED);
+		btnCount.setBounds(150, 200, 100, 23);
+		frame.getContentPane().add(btnCount);
 		
-		JButton btnNewButton_4 = new JButton("Traverse");
-		btnNewButton_4.setForeground(Color.RED);
-		btnNewButton_4.setBounds(280, 200, 100, 23);
-		frame.getContentPane().add(btnNewButton_4);
-		
-
-		JLabel lblNewLabel = new JLabel("");
-		lblNewLabel.setIcon(new ImageIcon("C:\\Users\\Mir Kamran Ellahi\\Documents\\GitHub\\Visual-Stack\\img\\stack-icon.png"));
-		
-		lblNewLabel.setBounds(0, 28, 143, 149);
-		frame.getContentPane().add(lblNewLabel);
-		
-		JLabel lblNewLabel_1 = new JLabel("");
-		lblNewLabel_1.setIcon(new ImageIcon("C:\\Users\\Mir Kamran Ellahi\\Documents\\GitHub\\Visual-Stack\\img\\stack-icon.png"));
-		lblNewLabel_1.setBounds(203, 25, 168, 163);
-		frame.getContentPane().add(lblNewLabel_1);
-		
-		JLabel label = new JLabel("");
-		label.setIcon(new ImageIcon("C:\\Users\\Mir Kamran Ellahi\\Documents\\GitHub\\Visual-Stack\\img\\stack-icon.png"));
-		label.setBounds(398, 25, 176, 163);
-		frame.getContentPane().add(label);
-		
-		JLabel label_1 = new JLabel("");
-		label_1.setIcon(new ImageIcon("C:\\Users\\Mir Kamran Ellahi\\Documents\\GitHub\\Visual-Stack\\img\\stack-icon.png"));
-		label_1.setBounds(77, 192, 143, 139);
-		frame.getContentPane().add(label_1);
-		
-		JLabel lblNewLabel_2 = new JLabel("New label");
-		lblNewLabel_2.setIcon(new ImageIcon("C:\\Users\\Mir Kamran Ellahi\\Documents\\GitHub\\Visual-Stack\\img\\stack-icon.png"));
-		lblNewLabel_2.setBounds(292, 185, 143, 146);
-		frame.getContentPane().add(lblNewLabel_2);
+		JButton btnTraverse = new JButton("Traverse");
+		btnTraverse.setForeground(Color.RED);
+		btnTraverse.setBounds(280, 200, 100, 23);
+		frame.getContentPane().add(btnTraverse);
 
 
 	}

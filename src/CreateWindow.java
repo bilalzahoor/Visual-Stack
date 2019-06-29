@@ -14,7 +14,9 @@ public class CreateWindow {
 
 	private JFrame frame;
 	private JTextField no_of_elements;
-	private JButton btnCreate;
+	private JButton btnOriginalCreate;
+	private static int capacity;
+	int element_no;
 
 	/**
 	 * Launch the application.
@@ -23,7 +25,7 @@ public class CreateWindow {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					CreateWindow window = new CreateWindow();
+					CreateWindow window = new CreateWindow(capacity);
 					window.frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -35,7 +37,8 @@ public class CreateWindow {
 	/**
 	 * Create the application.
 	 */
-	public CreateWindow() {
+	public CreateWindow(int m) {
+		capacity=m;
 		initialize();
 	}
 
@@ -58,36 +61,30 @@ public class CreateWindow {
 		frame.getContentPane().add(no_of_elements);
 		no_of_elements.setColumns(10);
 		
-		btnCreate = new JButton("Create");
-		btnCreate.addActionListener(new ActionListener() {
+		btnOriginalCreate = new JButton("Create");
+		btnOriginalCreate.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
-				int element_no = Integer.parseInt(no_of_elements.getText());
+				element_no = Integer.parseInt(no_of_elements.getText());
 				
-				if (element_no > 10) {
+				if (element_no > capacity) {
 				
-					JOptionPane.showMessageDialog(null, "options exceeded");
+					JOptionPane.showMessageDialog(null, "options exceeded... Total capacity is: "+ capacity);
 
 
 				}
 				else {
 					
 					
-					
-					
-					OriginalCreateWindow nw = new OriginalCreateWindow();
-					nw.OriginalCreateScreen();
+					AddElementsWindow nw = new AddElementsWindow(element_no);
+					nw.AddElementsScreen();
 					
 				}
 				
 			}
 		});
-		btnCreate.setBounds(39, 81, 89, 23);
-		frame.getContentPane().add(btnCreate);
-		
-		JList list = new JList();
-		list.setBounds(267, 81, 71, 155);
-		frame.getContentPane().add(list);
+		btnOriginalCreate.setBounds(39, 81, 89, 23);
+		frame.getContentPane().add(btnOriginalCreate);
 		
 		
 	}
