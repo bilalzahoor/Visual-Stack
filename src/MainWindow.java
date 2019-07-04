@@ -22,7 +22,7 @@ public class MainWindow {
 
 	private JFrame frame;
 	private JComboBox cmbMaxCapacity;
-	int maxCapacity;
+	static int maxCapacity;
 	private JComboBox cmbStackType;
 	
 

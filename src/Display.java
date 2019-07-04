@@ -2,6 +2,7 @@ import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.JTextField;
 import javax.swing.BoxLayout;
 import javax.swing.border.MatteBorder;
 import java.awt.Color;
@@ -10,11 +11,16 @@ import java.awt.Component;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import javax.swing.JPanel;
+import java.awt.Dimension;
+import javax.swing.SwingConstants;
 
 public class Display {
 
-	private JFrame frame;
-
+	public JFrame frame;
+	JTextField[] elements;
+	JPanel panel;
+	JPanel panelStack;
+	JLabel[] stack;
 	/**
 	 * Launch the application.
 	 */
@@ -22,7 +28,7 @@ public class Display {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					Display window = new Display();
+					Display window = new Display(null);
 					window.frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -34,8 +40,11 @@ public class Display {
 	/**
 	 * Create the application.
 	 */
-	public Display() {
+	public Display(JTextField[] e) {
+		elements=e;
+		stack=new JLabel[MainWindow.maxCapacity];
 		initialize();
+		visualize();
 	}
 
 	/**
@@ -43,35 +52,49 @@ public class Display {
 	 */
 	private void initialize() {
 		frame = new JFrame();
-		frame.setBounds(100, 100, 450, 300);
+		frame.setBounds(100, 100, 822, 598);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 		
-		JPanel panel = new JPanel();
-		panel.setBounds(0, 0, 434, 261);
+		panel = new JPanel();
+		panel.setBounds(6, 77, 435, 493);
 		frame.getContentPane().add(panel);
 		panel.setLayout(null);
 		
-		JPanel panelStack = new JPanel();
-		panelStack.setBorder(new MatteBorder(0, 3, 3, 3, (Color) new Color(0, 0, 0)));
-		panelStack.setBounds(171, 57, 50, 37);
-		panel.add(panelStack);
-		panelStack.setLayout(new BoxLayout(panelStack, BoxLayout.X_AXIS));
+		JPanel panel_1 = new JPanel();
+		panel_1.setBounds(35, 45, 348, 403);
+		panel.add(panel_1);
 		
-		for(int i=0;i<5;i++) {
-		JPanel panelElement = new JPanel();
-		panelElement.setBorder(new MatteBorder(3, 0, 0, 0, (Color) new Color(0, 0, 0)));
-		panelElement.setAlignmentX(Component.LEFT_ALIGNMENT);
-		panelStack.add(panelElement);
-		panelElement.setLayout(new BoxLayout(panelElement, BoxLayout.X_AXIS));
+        panelStack = new JPanel();
+		panelStack.setBorder(new MatteBorder(0, 2, 2, 2, (Color) new Color(0, 0, 0)));
+		panel_1.add(panelStack);
+		panelStack.setLayout(new BoxLayout(panelStack, BoxLayout.Y_AXIS));
 		
-		JLabel lblIndex = new JLabel("New label");
-		panelElement.add(lblIndex);
+				
 		
-		JLabel lblElement = new JLabel("New label");
-		panelElement.add(lblElement);
-		}
 	}
+	 void visualize() {
+		 int max=MainWindow.maxCapacity;
+		
+	for(int i=0;i<max;i++) {
+			JTextField t = elements[max-1-i];
+			
+			JLabel lblIndex = new JLabel(t.getText());
+			lblIndex.setHorizontalAlignment(SwingConstants.CENTER);
+			lblIndex.setPreferredSize(new Dimension(100, 16));
+			lblIndex.setMaximumSize(new Dimension(100, 16));
+			lblIndex.setMinimumSize(new Dimension(100, 16));
+			lblIndex.setBorder(new MatteBorder(0, 0, 1, 0, (Color) new Color(0, 0, 0)));
+			
+			panelStack.add(lblIndex);
+			stack[i]=lblIndex;
+		}
+					
+
+		
+		
+	}
+
 	public class UpsideDownJPanel extends JPanel {
 
 	    public UpsideDownJPanel() {}

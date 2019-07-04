@@ -6,6 +6,9 @@ import javax.swing.JTextField;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import javax.swing.JPanel;
+import javax.swing.BoxLayout;
+import javax.swing.JScrollPane;
 
 public class AddElementsWindow {
 
@@ -14,7 +17,8 @@ public class AddElementsWindow {
 	 *Launch the application.
 	 */
 	static int Elements;
-	private JTextField txtElements;
+	private JTextField txtElement;
+	JTextField[] elements;
 	public static void AddElementsScreen() {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
@@ -33,6 +37,7 @@ public class AddElementsWindow {
 	 */
 	public AddElementsWindow(int m) {
 		Elements = m;
+		elements= new JTextField[m];
 		initialize();
 	}
 
@@ -45,32 +50,48 @@ public class AddElementsWindow {
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 		
-		JLabel lblElements = new JLabel("Add Element no. : ");
-		lblElements.setBounds(0, 25, 117, 14);
-		frame.getContentPane().add(lblElements);
-		
-		
-		txtElements = new JTextField();
-		txtElements.setBounds(165, 22, 96, 20);
-		frame.getContentPane().add(txtElements);
-		txtElements.setColumns(10);
-		
 		JButton btnAdd = new JButton("ADD");
 		btnAdd.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
-				for(int i=0;i<Elements;i++) {
-					lblElements.setText("Add Element no. : "+(i+1));
+					Display d=new Display(elements);
+					d.frame.setVisible(true);
+					frame.setVisible(false);
 					
-					
-				}
 				
 				
 				
 			}
 		});
-		btnAdd.setBounds(312, 21, 89, 23);
+		btnAdd.setBounds(201, 232, 89, 23);
 		frame.getContentPane().add(btnAdd);
+		
+		JScrollPane scrollPane = new JScrollPane();
+		scrollPane.setBounds(0, 0, 444, 220);
+		frame.getContentPane().add(scrollPane);
+		
+		JPanel panelContainer = new JPanel();
+		scrollPane.setViewportView(panelContainer);
+		
+		JPanel panel = new JPanel();
+		panelContainer.add(panel);
+		panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
+		
+		for(int i=0;i<Elements;i++) {
+		JPanel panelElement = new JPanel();
+		panel.add(panelElement);
+		panelElement.setLayout(new BoxLayout(panelElement, BoxLayout.X_AXIS));
+		
+		JLabel lblElement = new JLabel("Add Element no "+(i+1)+": ");
+		panelElement.add(lblElement);
+		
+		
+		txtElement = new JTextField();
+		panelElement.add(txtElement);
+		txtElement.setColumns(10);
+		elements[i]= txtElement;
+		}
+		
 	
 		
 	}
