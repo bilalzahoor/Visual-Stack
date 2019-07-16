@@ -16,14 +16,16 @@ public class AddElementsWindow {
 	 /*
 	 *Launch the application.
 	 */
-	static int Elements;
+	static int noOfElements;
 	private JTextField txtElement;
 	JTextField[] elements;
+	int[] data;
+	static int maxCapacity;
 	public static void AddElementsScreen() {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					AddElementsWindow window = new AddElementsWindow(Elements);
+					AddElementsWindow window = new AddElementsWindow(noOfElements,maxCapacity);
 					window.frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -35,9 +37,11 @@ public class AddElementsWindow {
 	/**
 	 * Create the application.
 	 */
-	public AddElementsWindow(int m) {
-		Elements = m;
+	public AddElementsWindow(int m,int c) {
+		noOfElements = m;
+		maxCapacity=c;
 		elements= new JTextField[m];
+		data= new int[c];
 		initialize();
 	}
 
@@ -53,8 +57,16 @@ public class AddElementsWindow {
 		JButton btnAdd = new JButton("ADD");
 		btnAdd.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				for(int i=0;i<maxCapacity;i++) {
+					if(i<noOfElements)
+					data[i]=Integer.parseInt(elements[i].getText().toString());
+					else
+						data[i]=-1;
+					
+				}
+					
 				
-					Display d=new Display(elements);
+				Display d=new Display(data);
 					d.frame.setVisible(true);
 					frame.setVisible(false);
 					
@@ -77,22 +89,21 @@ public class AddElementsWindow {
 		panelContainer.add(panel);
 		panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
 		
-		for(int i=0;i<Elements;i++) {
-		JPanel panelElement = new JPanel();
-		panel.add(panelElement);
-		panelElement.setLayout(new BoxLayout(panelElement, BoxLayout.X_AXIS));
+		for(int i=0;i<noOfElements;i++) {
 		
-		JLabel lblElement = new JLabel("Add Element no "+(i+1)+": ");
-		panelElement.add(lblElement);
+			JPanel panelElement = new JPanel();
+			panel.add(panelElement);
+			panelElement.setLayout(new BoxLayout(panelElement, BoxLayout.X_AXIS));
 		
+			JLabel lblElement = new JLabel("Add Element no "+(i+1)+": ");
+			panelElement.add(lblElement);
 		
-		txtElement = new JTextField();
-		panelElement.add(txtElement);
-		txtElement.setColumns(10);
-		elements[i]= txtElement;
+			txtElement = new JTextField();
+			panelElement.add(txtElement);
+			txtElement.setColumns(10);
+			elements[i]= txtElement;
+			}
 		}
 		
 	
-		
-	}
 }

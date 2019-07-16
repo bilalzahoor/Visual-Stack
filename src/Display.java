@@ -17,7 +17,7 @@ import javax.swing.SwingConstants;
 public class Display {
 
 	public JFrame frame;
-	JTextField[] elements;
+	int[] data;
 	JPanel panel;
 	JPanel panelStack;
 	JLabel[] stack;
@@ -40,8 +40,8 @@ public class Display {
 	/**
 	 * Create the application.
 	 */
-	public Display(JTextField[] e) {
-		elements=e;
+	public Display(int[] d) {
+		data=d;
 		stack=new JLabel[MainWindow.maxCapacity];
 		initialize();
 		visualize();
@@ -77,9 +77,19 @@ public class Display {
 		 int max=MainWindow.maxCapacity;
 		
 	for(int i=0;i<max;i++) {
-			JTextField t = elements[max-1-i];
+		JLabel lblIndex =new JLabel();
+		
+			if((max-1-i)==AddElementsWindow.noOfElements-1) {
+				lblIndex.setText((data[max-1-i]+" (TOP)"));
+			}
 			
-			JLabel lblIndex = new JLabel(t.getText());
+			else {
+				if((data[max-1-i]) == -1)
+						lblIndex.setText("");	
+				else
+				 lblIndex.setText((data[max-1-i]+""));
+				
+			}
 			lblIndex.setHorizontalAlignment(SwingConstants.CENTER);
 			lblIndex.setPreferredSize(new Dimension(100, 16));
 			lblIndex.setMaximumSize(new Dimension(100, 16));

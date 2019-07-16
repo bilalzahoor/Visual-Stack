@@ -76,7 +76,7 @@ public class CreateWindow {
 				else {
 					
 					
-					AddElementsWindow nw = new AddElementsWindow(element_no);
+					AddElementsWindow nw = new AddElementsWindow(element_no,capacity);
 					nw.AddElementsScreen();
 					
 				}
