@@ -61,7 +61,7 @@ public class AddElementsWindow {
 					if(i<noOfElements)
 					data[i]=Integer.parseInt(elements[i].getText().toString());
 					else
-						data[i]=-1;
+						data[i]=-0;
 					
 				}
 					

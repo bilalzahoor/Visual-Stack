@@ -120,43 +120,10 @@ public class MainWindow {
 		});
 		btnCreate.setForeground(Color.RED);
 
-		btnCreate.setBounds(17, 151, 106, 23);
+		btnCreate.setBounds(210, 174, 144, 60);
 
 
 		frame.getContentPane().add(btnCreate);
-		
-		JLabel lblStackOperations = new JLabel("Stack Operations :");
-		lblStackOperations.setBounds(20, 100, 125, 25);
-		frame.getContentPane().add(lblStackOperations);
-		
-		JButton btnPush = new JButton("Push");
-		btnPush.setForeground(Color.RED);
-		btnPush.setBounds(150, 150, 100, 23);
-		frame.getContentPane().add(btnPush);
-		
-		JButton btnpop = new JButton("Pop");
-		btnpop.setForeground(Color.RED);
-		btnpop.setBounds(280, 150, 100, 23);
-		frame.getContentPane().add(btnpop);
-		
-
-		JButton btnPeep = new JButton("Peep");
-		btnPeep.setForeground(Color.RED);
-		btnPeep.setBounds(17, 203, 106, 22);
-		frame.getContentPane().add(btnPeep);
-		
-
-
-
-		JButton btnCount = new JButton("Count");
-		btnCount.setForeground(Color.RED);
-		btnCount.setBounds(150, 200, 100, 23);
-		frame.getContentPane().add(btnCount);
-		
-		JButton btnTraverse = new JButton("Traverse");
-		btnTraverse.setForeground(Color.RED);
-		btnTraverse.setBounds(280, 200, 100, 23);
-		frame.getContentPane().add(btnTraverse);
 
 
 	}

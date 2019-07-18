@@ -1,16 +1,13 @@
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
-import javax.swing.JLabel;
-import java.awt.Font;
-import java.awt.Canvas;
-import java.awt.Panel;
+import javax.swing.JOptionPane;
 import javax.swing.JButton;
+import java.awt.BorderLayout;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
-import javax.swing.SwingConstants;
 
-public class SecondWindow {
+public class Test {
 
 	private JFrame frame;
 
@@ -21,7 +18,7 @@ public class SecondWindow {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					SecondWindow window = new SecondWindow();
+					Test window = new Test();
 					window.frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -33,7 +30,7 @@ public class SecondWindow {
 	/**
 	 * Create the application.
 	 */
-	public SecondWindow() {
+	public Test() {
 		initialize();
 	}
 
@@ -46,10 +43,26 @@ public class SecondWindow {
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 		
-		JLabel lblVisualStackIs = new JLabel("Visual Stack Is Empty");
-		lblVisualStackIs.setHorizontalAlignment(SwingConstants.CENTER);
-		lblVisualStackIs.setFont(new Font("STIXSizeTwoSym", Font.PLAIN, 20));
-		lblVisualStackIs.setBounds(100, 50, 270, 100);
-		frame.getContentPane().add(lblVisualStackIs);
+		JButton btn1 = new JButton("New button");
+		
+		btn1.addActionListener(new ActionListener() {
+			boolean pressed = false;
+			public void actionPerformed(ActionEvent e) {
+				
+				
+				 {
+					 JOptionPane.showMessageDialog(null, "hello");
+				 }
+
+				if (!pressed) {
+					btn1.setText("Create");
+					btn1.setVisible(false);
+				    pressed = true;
+				}
+			}
+		});
+		btn1.setBounds(0, 0, 434, 261);
+		frame.getContentPane().add(btn1);
 	}
+
 }

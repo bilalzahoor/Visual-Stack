@@ -9,6 +9,8 @@ import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.JList;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 
 public class CreateWindow {
 
@@ -56,7 +58,48 @@ public class CreateWindow {
 		frame.getContentPane().add(lblNewLabel);
 		
 		no_of_elements = new JTextField();
-		no_of_elements.setToolTipText("1-10");
+		no_of_elements.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyPressed(KeyEvent e) {
+				if(e.getKeyCode()==KeyEvent.VK_ENTER) {
+					
+					element_no = Integer.parseInt(no_of_elements.getText());
+				
+				if (element_no > capacity) {
+				
+					JOptionPane.showMessageDialog(null, "options exceeded... Total capacity is: "+ capacity);
+
+
+				}
+				else {
+					
+					
+					AddElementsWindow nw = new AddElementsWindow(element_no,capacity);
+					nw.AddElementsScreen();
+					
+				
+			}
+				}
+				e.consume();
+			
+			}
+			@Override
+			public void keyTyped(KeyEvent e) {
+				char c = e.getKeyChar();
+			
+				
+				if(! (Character.isDigit(c)|| c==KeyEvent.VK_BACK_SPACE || c==KeyEvent.VK_DELETE)) {
+					
+			
+					e.consume();
+					
+					
+				}
+				
+				
+			}
+			});
+		no_of_elements.setToolTipText("");
 		no_of_elements.setBounds(147, 28, 96, 20);
 		frame.getContentPane().add(no_of_elements);
 		no_of_elements.setColumns(10);
@@ -72,6 +115,10 @@ public class CreateWindow {
 					JOptionPane.showMessageDialog(null, "options exceeded... Total capacity is: "+ capacity);
 
 
+				}
+				else if (element_no == 0) {
+					
+					JOptionPane.showMessageDialog(null, "There Must Be Atleast one Element ");
 				}
 				else {
 					
