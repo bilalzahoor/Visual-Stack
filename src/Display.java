@@ -12,15 +12,19 @@ import javax.swing.JOptionPane;
 import java.awt.Component;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.TrayIcon.MessageType;
+
 import javax.swing.JPanel;
 import java.awt.Dimension;
 import javax.swing.SwingConstants;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+
 import java.awt.FlowLayout;
 import javax.swing.JScrollPane;
 import javax.swing.border.LineBorder;
+
 
 public class Display {
 
@@ -30,7 +34,12 @@ public class Display {
 	JPanel panelStack;
 	JPanel panelArray;
 	JLabel[] stack;
+
 	JLabel[] array;
+
+	JFrame j;
+	int max;
+
 	int top = AddElementsWindow.noOfElements - 1;
 	/**
 	 * Launch the application.
@@ -54,7 +63,9 @@ public class Display {
 	public Display(int[] d) {
 		data=d;
 		stack=new JLabel[MainWindow.maxCapacity];
+
 		array=new JLabel[MainWindow.maxCapacity];
+
 		initialize();
 		visualizeArray();
 	}
@@ -82,6 +93,7 @@ public class Display {
 		panel_1.add(panelStack);
 		panelStack.setLayout(new BoxLayout(panelStack, BoxLayout.Y_AXIS));
 		
+
 		JButton btnPush = new JButton("PUSH");
 		btnPush.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -140,10 +152,33 @@ public class Display {
 				JOptionPane.showMessageDialog(null, "Stack Deleted");
 				btnDelete.setVisible(false);
 				panelStack.getRootPane().revalidate();
+
+		
+		JButton btnCreate = new JButton("PUSH");
+		btnCreate.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if(top==max-1) {
+					
+					
+				}
+				else {
+				j= new JFrame();
+				
+				String input=JOptionPane.showInputDialog(j, "Enter the Element");
+				top=top+1;
+				AddElementsWindow.noOfElements++;
+			
+			data[top]=Integer.parseInt(input);
+			panelStack.removeAll();
+			visualize();
+				}
+				
+
 				
 				
 			}
 		});
+
 		btnDelete.setBounds(510, 422, 89, 23);
 		frame.getContentPane().add(btnDelete);
 		
@@ -173,14 +208,29 @@ public class Display {
 		});
 		btnNewButton.setBounds(510, 320, 89, 23);
 		frame.getContentPane().add(btnNewButton);
+		btnCreate.setBounds(489, 132, 117, 29);
+		frame.getContentPane().add(btnCreate);
+		
+		JButton btnPop = new JButton("POP");
+		btnPop.setBounds(489, 202, 117, 29);
+		frame.getContentPane().add(btnPop);
+		
+		JButton btnCount = new JButton("COUNT");
+		btnCount.setBounds(489, 278, 117, 29);
+		frame.getContentPane().add(btnCount);
+		
+		JButton btnPeep = new JButton("PEEP");
+		btnPeep.setBounds(491, 357, 117, 29);
+		frame.getContentPane().add(btnPeep);
+
 		
 				
 		
 	}
 	 void visualize() {
-		 int max=MainWindow.maxCapacity;
-		
-	for(int i=0;i<max;i++) {
+		 max=MainWindow.maxCapacity;
+		 //panelStack.removeAll();
+		 for(int i=0;i<max;i++) {
 		JLabel lblIndex =new JLabel();
 		
 			if((max-1-i)==AddElementsWindow.noOfElements-1) {
@@ -189,9 +239,15 @@ public class Display {
 			}
 			
 			else {
+
 				if((data[max-1-i]) == -0)
 						lblIndex.setText("");	
 				else
+
+				//if((data[max-1-i]) == -1)
+						//lblIndex.setText("");	
+			//	else
+
 				 lblIndex.setText((data[max-1-i]+""));
 				
 			}

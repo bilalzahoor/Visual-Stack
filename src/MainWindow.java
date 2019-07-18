@@ -120,10 +120,20 @@ public class MainWindow {
 		});
 		btnCreate.setForeground(Color.RED);
 
+ 
 		btnCreate.setBounds(210, 174, 144, 60);
 
 
 		frame.getContentPane().add(btnCreate);
+
+		btnCreate.setBounds(200, 175, 187, 76);
+
+
+		frame.getContentPane().add(btnCreate);
+		
+		JLabel lblStackOperations = new JLabel("Stack Operations :");
+		lblStackOperations.setBounds(20, 100, 125, 25);
+		frame.getContentPane().add(lblStackOperations);
 
 
 	}
