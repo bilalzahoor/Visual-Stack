@@ -18,12 +18,21 @@ import javax.swing.JPanel;
 import java.awt.Dimension;
 import javax.swing.SwingConstants;
 import javax.swing.JButton;
+import javax.swing.JFileChooser;
+
 import java.awt.event.ActionListener;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.awt.event.ActionEvent;
 
 import java.awt.FlowLayout;
 import javax.swing.JScrollPane;
 import javax.swing.border.LineBorder;
+import javax.swing.ScrollPaneConstants;
 
 
 public class Display {
@@ -41,9 +50,7 @@ public class Display {
 	int max;
 
 	int top = AddElementsWindow.noOfElements - 1;
-	/**
-	 * Launch the application.
-	 */
+	
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
@@ -57,41 +64,51 @@ public class Display {
 		});
 	}
 
-	/**
-	 * Create the application.
-	 */
+	
 	public Display(int[] d) {
 		data=d;
 		stack=new JLabel[MainWindow.maxCapacity];
 
 		array=new JLabel[MainWindow.maxCapacity];
+	
 
-		initialize();
-		visualizeArray();
-	}
+	
+	initialize();
+	visualizeArray();
+}
 
-	/**
-	 * Initialize the contents of the frame.
-	 */
+	
+	
 	private void initialize() {
 		frame = new JFrame();
 		frame.setBounds(100, 100, 822, 598);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
+		//frame.setResizable(false);
+		frame.setSize(880,500);
 		
 		panel = new JPanel();
 		panel.setBounds(6, 157, 435, 413);
 		frame.getContentPane().add(panel);
 		panel.setLayout(null);
 		
+		JScrollPane scrollPane_1 = new JScrollPane();
+		scrollPane_1.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+		scrollPane_1.setBounds(35, 48, 348, 263);
+		panel.add(scrollPane_1);
+		
 		JPanel panel_1 = new JPanel();
-		panel_1.setBounds(35, 45, 348, 334);
-		panel.add(panel_1);
+		scrollPane_1.setViewportView(panel_1);
 		
         panelStack = new JPanel();
 		panelStack.setBorder(new MatteBorder(0, 2, 2, 2, (Color) new Color(0, 0, 0)));
 		panel_1.add(panelStack);
 		panelStack.setLayout(new BoxLayout(panelStack, BoxLayout.Y_AXIS));
+		
+		JLabel lblStackRepresention = new JLabel("STACK REPRESENTATION");
+		lblStackRepresention.setBounds(150, 23, 176, 14);
+		panel.add(lblStackRepresention);
+		lblStackRepresention.setVisible(false);
 		
 
 		JButton btnPush = new JButton("PUSH");
@@ -110,13 +127,15 @@ public class Display {
 				data[top]= ElementInput;
 				panelStack.removeAll();
 				visualize();
+				panelArray.removeAll();
+				visualizeArray();
 				panelStack.getRootPane().revalidate();
 				
 				
 				}
 			}
 		});
-		btnPush.setBounds(510, 354, 89, 23);
+		btnPush.setBounds(510, 255, 129, 23);
 		frame.getContentPane().add(btnPush);
 		
 		JButton btnPop = new JButton("POP");
@@ -135,12 +154,15 @@ public class Display {
 					AddElementsWindow.noOfElements--;
 					panelStack.removeAll();
 					visualize();
+					panelArray.removeAll();
+					visualizeArray();
 					panelStack.getRootPane().revalidate();
+					panelArray.getRootPane().revalidate();
 				}
 				
 			}
 		});
-		btnPop.setBounds(510, 389, 89, 23);
+		btnPop.setBounds(510, 311, 129, 23);
 		frame.getContentPane().add(btnPop);
 		
 		JButton btnDelete = new JButton("DELETE");
@@ -149,11 +171,15 @@ public class Display {
 				
 				data=null;
 				panelStack.removeAll();
-				JOptionPane.showMessageDialog(null, "Stack Deleted");
 				btnDelete.setVisible(false);
 				panelStack.getRootPane().revalidate();
-
-		
+				JOptionPane.showMessageDialog(null, "Stack Deleted");
+				frame.setVisible(false);
+				
+				MainWindow.frame.setVisible(true);
+				
+			}
+			});
 		JButton btnCreate = new JButton("PUSH");
 		btnCreate.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -179,7 +205,7 @@ public class Display {
 			}
 		});
 
-		btnDelete.setBounds(510, 422, 89, 23);
+		btnDelete.setBounds(510, 365, 129, 23);
 		frame.getContentPane().add(btnDelete);
 		
 		JPanel panel_2 = new JPanel();
@@ -188,7 +214,7 @@ public class Display {
 		panel_2.setLayout(null);
 		
 		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(10, 11, 694, 101);
+		scrollPane.setBounds(10, 38, 694, 74);
 		panel_2.add(scrollPane);
 		
 		JPanel panel_3 = new JPanel();
@@ -200,29 +226,88 @@ public class Display {
 		panel_3.add(panelArray);
 		panelArray.setLayout(new BoxLayout(panelArray, BoxLayout.X_AXIS));
 		
+		JButton btnShowStack = new JButton("SHOW STACK");
+		btnShowStack.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				visualize();
+				btnShowStack.setVisible(false);
+				lblStackRepresention.setVisible(true);
+				panelStack.getRootPane().revalidate();
+			}
+		});
+		btnShowStack.setBounds(510, 203, 129, 23);
+		frame.getContentPane().add(btnShowStack);
+		
+		JLabel lblArrayRepresention = new JLabel("ARRAY REPRESENTATION");
+		lblArrayRepresention.setBounds(313, 11, 214, 23);
+		frame.getContentPane().add(lblArrayRepresention);
+		
+		JButton btnSave = new JButton("Save");
+		btnSave.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				String filename="test.txt";
+				try {
+					FileOutputStream output = new FileOutputStream(filename);
+					//String data ="welcome";
+					try {
+						ObjectOutputStream obj = new ObjectOutputStream(output);
+						obj.writeObject(data);
+						output.close();
+					} catch (IOException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
+					
+				} catch (FileNotFoundException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+				JFileChooser f = new JFileChooser("C:");
+				f.showSaveDialog(null);
+			}
+		});
+		btnSave.setBounds(510, 410, 129, 23);
+		frame.getContentPane().add(btnSave);
+		
+		JButton btnOpen = new JButton("Open");
+		btnOpen.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				String filename="test.txt";
+				try {
+					FileInputStream input = new FileInputStream(filename);
+					//String data ="welcome";
+					try {
+						ObjectInputStream obj = new ObjectInputStream(input);
+						try {
+							data= (int[])obj.readObject();
+						} catch (ClassNotFoundException e1) {
+							// TODO Auto-generated catch block
+							e1.printStackTrace();
+						}
+						input.close();
+					} catch (IOException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
+					
+				} catch (FileNotFoundException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+				JFileChooser f = new JFileChooser("C:");
+				f.showSaveDialog(null);
+			}
+		});
+		btnOpen.setBounds(531, 166, 89, 23);
+		frame.getContentPane().add(btnOpen);
+		
 		JButton btnNewButton = new JButton("Build Stack");
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				visualize();
 			}
 		});
-		btnNewButton.setBounds(510, 320, 89, 23);
-		frame.getContentPane().add(btnNewButton);
-		btnCreate.setBounds(489, 132, 117, 29);
-		frame.getContentPane().add(btnCreate);
 		
-		JButton btnPop = new JButton("POP");
-		btnPop.setBounds(489, 202, 117, 29);
-		frame.getContentPane().add(btnPop);
-		
-		JButton btnCount = new JButton("COUNT");
-		btnCount.setBounds(489, 278, 117, 29);
-		frame.getContentPane().add(btnCount);
-		
-		JButton btnPeep = new JButton("PEEP");
-		btnPeep.setBounds(491, 357, 117, 29);
-		frame.getContentPane().add(btnPeep);
-
 		
 				
 		
@@ -244,17 +329,14 @@ public class Display {
 						lblIndex.setText("");	
 				else
 
-				//if((data[max-1-i]) == -1)
-						//lblIndex.setText("");	
-			//	else
 
 				 lblIndex.setText((data[max-1-i]+""));
 				
 			}
 			lblIndex.setHorizontalAlignment(SwingConstants.CENTER);
-			lblIndex.setPreferredSize(new Dimension(100, 16));
-			lblIndex.setMaximumSize(new Dimension(100, 16));
-			lblIndex.setMinimumSize(new Dimension(100, 16));
+			lblIndex.setPreferredSize(new Dimension(150, 30));
+			lblIndex.setMaximumSize(new Dimension(150, 30));
+			lblIndex.setMinimumSize(new Dimension(150, 30));
 			lblIndex.setBorder(new MatteBorder(0, 0, 1, 0, (Color) new Color(0, 0, 0)));
 			
 			panelStack.add(lblIndex);
@@ -283,21 +365,8 @@ public class Display {
 		
 		
 	}
-	 
-
-	public class UpsideDownJPanel extends JPanel {
-
-	    public UpsideDownJPanel() {}
-
-	    public void paintComponent(Graphics graphics) {
-	            Graphics2D g = (Graphics2D) graphics;
-	            int x = this.getWidth() / 2;
-	            int y = this.getHeight() / 2;
-	            g.rotate(Math.toRadians(180.0), x, y);
-	            super.paintComponent(g);
-	    }
-
 	}
-}
+
+	
 
 

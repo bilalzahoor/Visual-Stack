@@ -14,7 +14,7 @@ import java.awt.event.KeyEvent;
 
 public class CreateWindow {
 
-	private JFrame frame;
+	static JFrame CreateWindowframe;
 	private JTextField no_of_elements;
 	private JButton btnOriginalCreate;
 	private static int capacity;
@@ -28,7 +28,7 @@ public class CreateWindow {
 			public void run() {
 				try {
 					CreateWindow window = new CreateWindow(capacity);
-					window.frame.setVisible(true);
+					window.CreateWindowframe.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -48,14 +48,14 @@ public class CreateWindow {
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
-		frame = new JFrame();
-		frame.setBounds(100, 100, 450, 300);
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.getContentPane().setLayout(null);
+		CreateWindowframe = new JFrame();
+		CreateWindowframe.setBounds(100, 100, 450, 300);
+		CreateWindowframe.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		CreateWindowframe.getContentPane().setLayout(null);
 		
 		JLabel lblNewLabel = new JLabel("No. Of Elements :");
 		lblNewLabel.setBounds(10, 31, 94, 14);
-		frame.getContentPane().add(lblNewLabel);
+		CreateWindowframe.getContentPane().add(lblNewLabel);
 		
 		no_of_elements = new JTextField();
 		no_of_elements.addKeyListener(new KeyAdapter() {
@@ -88,7 +88,7 @@ public class CreateWindow {
 				char c = e.getKeyChar();
 			
 				
-				if(! (Character.isDigit(c)|| c==KeyEvent.VK_BACK_SPACE || c==KeyEvent.VK_DELETE)) {
+				if(! (Character.isDigit(c) || c==KeyEvent.VK_BACK_SPACE || c==KeyEvent.VK_DELETE)) {
 					
 			
 					e.consume();
@@ -101,7 +101,7 @@ public class CreateWindow {
 			});
 		no_of_elements.setToolTipText("");
 		no_of_elements.setBounds(147, 28, 96, 20);
-		frame.getContentPane().add(no_of_elements);
+		CreateWindowframe.getContentPane().add(no_of_elements);
 		no_of_elements.setColumns(10);
 		
 		btnOriginalCreate = new JButton("Create");
@@ -125,13 +125,14 @@ public class CreateWindow {
 					
 					AddElementsWindow nw = new AddElementsWindow(element_no,capacity);
 					nw.AddElementsScreen();
+					CreateWindowframe.setVisible(false);
 					
 				}
 				
 			}
 		});
 		btnOriginalCreate.setBounds(39, 81, 89, 23);
-		frame.getContentPane().add(btnOriginalCreate);
+		CreateWindowframe.getContentPane().add(btnOriginalCreate);
 		
 		
 	}
